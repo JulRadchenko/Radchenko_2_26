@@ -14,8 +14,8 @@ while True:
         break
     for j in a:
         res = re.findall(r'[1-9 A-F]*\d*[02468ACE]', j)
-        if len(res) > 0:
-            if len(j) == len(res[0]) and len(j)>0:
+        if len(res) == 1:
+            if len(j) == len(res[0]) and len(j)>0 and int(res[0],16) <= 2048:
                 print(res[0], end=" ")
                 kolich += 1
                 if int(res[0], 16) > int(maxim, 16):
