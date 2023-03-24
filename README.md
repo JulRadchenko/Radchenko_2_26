@@ -7,15 +7,19 @@ maxim = "0"
 s_maxim = ''
 kolich = 0
 file = open("text.txt", "r")
+marks = '''!()-[]{};?@#$%:'"\,./^&amp;*_'''
 while True:
     a = file.readline().split()
     if not a:
-        print('Конец файла')
+        print('\nКонец файла')
         break
     for j in a:
-        res = re.findall(r'[1-9 A-F]*\d*[02468ACE]', j)
+        for x in j:
+            if x in marks:
+                j = j.replace(x, "")
+        res = re.findall(r'[1-7]?[0-9 A-F]?[02468ACE]{1}', j)
         if len(res) == 1:
-            if len(j) == len(res[0]) and len(j)>0 and int(res[0],16) <= 2048:
+            if len(j) == len(res[0]) and len(j)>0:
                 print(res[0], end=" ")
                 kolich += 1
                 if int(res[0], 16) > int(maxim, 16):
